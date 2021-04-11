@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="regis_course.mapper">
+		
+	<select id="list_course" resultType="regis_course.RegisCourseVO">
+		SELECT     @ROWNUM := @ROWNUM + 1 AS no, m.name 
+		FROM       regis_course rc, (SELECT @ROWNUM := 0) TMP
+		INNER JOIN member m
+		ON         rc.student_id = m.id
+		WHERE      rc.course_id=#{id }
+		ORDER BY   title ASC
+	</select>
+	
+	<select id="list_student" resultType="regis_course.RegisCourseVO">
+		SELECT     @ROWNUM := @ROWNUM + 1 AS no, c.title 
+		FROM       regis_course rc, (SELECT @ROWNUM := 0) TMP
+		INNER JOIN course c
+		ON         rc.course_id = c.id
+		WHERE      rc.student_id=#{id }
+		ORDER BY   title ASC
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO regis_course(student_id, course_id)
+		VALUES (#{student_id }, #{course_id })
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM regis_course WHERE id=#{id }
+	</delete>
+	
+</mapper>
