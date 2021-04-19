@@ -6,8 +6,7 @@
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- 어느 페이지에 가도 인클루드 되어있는 헤더에 jQuery 선언문을 넣는다. -->
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>  -->
-<script src="jquery/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <style>
@@ -22,7 +21,7 @@
 
 <div class="container">
   <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+    <a href="<core:url value='/' />" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
       <img src="images/logo.png" />
     </a>
 
@@ -51,7 +50,7 @@
           <li><a class="dropdown-item" href="#">Course</a></li>
           <li><a class="dropdown-item" href="#">Profile</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Sign out</a></li>
+          <li><a class="dropdown-item" href="javascript:go_logout()">Sign out</a></li>
         </ul>
       </div>
 	</core:if>
@@ -59,15 +58,14 @@
 	<!-- 로그인하지 않은 경우 -->
 	<core:if test="${empty login_info }">
 	    <div class="col-md-3 text-end">
-	      <button type="button" class="btn btn-outline-primary me-2" onclick="/login">Login</button>
-	      <button type="button" class="btn btn-primary" onclick="/join">Sign-up</button>
+	      <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='login'">Login</button>
+	      <button type="button" class="btn btn-primary" onclick="location.href='join'">Sign-up</button>
 	    </div>
     </core:if>
   </header>
 </div>
 
-
-<script>
+<script type="text/javascript">
 function go_logout() {
 	$.ajax({
 		type: "post",
@@ -76,7 +74,7 @@ function go_logout() {
 			location.reload();
 		},
 		error: function(req, text) {
-			 alert(text + ': ' + req.status);
+			alert(text + ': ' + req.status);
 	 	}
 	});
 }

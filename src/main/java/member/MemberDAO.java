@@ -16,7 +16,7 @@ public class MemberDAO implements MemberService {
 	}
 
 	@Override
-	public MemberVO member_select(String id) {
+	public MemberVO member_select(String userid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -27,8 +27,8 @@ public class MemberDAO implements MemberService {
 	}
 
 	@Override
-	public boolean member_id_check(String id) {
-		return (Integer) sql.selectOne("member.mapper.id_check", id) == 0 ? true : false;
+	public boolean member_id_check(String userid) {
+		return (Integer) sql.selectOne("member.mapper.id_check", userid) == 0 ? true : false;
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class MemberDAO implements MemberService {
 	}
 
 	@Override
-	public boolean member_delete(String id) {
+	public boolean member_delete(String userid) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -16,8 +16,8 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	
 	<resources location="/resources/css/" mapping="/css/**" />
+	<resources location="/resources/js/" mapping="/js/**" />
 	<resources location="/resources/bootstrap/" mapping="/bootstrap/**" />
-	<resources location="/resources/jquery/" mapping="/jquery/**" />
 	
 	<!-- images 폴더 맵핑 -->
 	<resources location="/resources/images/" mapping="/images/**" />

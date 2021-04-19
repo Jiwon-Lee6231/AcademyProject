@@ -12,8 +12,8 @@
 	</select>
 	
 	<insert id="join">
-		INSERT INTO member(userid, pw, name, gender, birth, tel, status, employ, regisdate, lastdate)
-		VALUES (#{userid }, #{pw }, #{name }, #{gender}, #{birth }, #{tel }, #{status }, 'Y', #{regisdate }, #{lastdate })
+		INSERT INTO member(userid, pw, name, gender, birth, phone, email, status, employ, post, addr)
+		VALUES (#{userid }, #{pw }, #{name }, #{gender}, #{birth }, #{phone }, #{email }, '입사', 'Y', #{post }, #{addr })
 	</insert>
 	
 	<select id="list" resultType="member.MemberVO">

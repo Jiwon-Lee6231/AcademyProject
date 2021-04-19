@@ -15,20 +15,19 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO member_select(String id) {
+	public MemberVO member_select(String userid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public MemberVO member_login(HashMap<String, String> map) {
-		// TODO Auto-generated method stub
 		return dao.member_login(map);
 	}
 
 	@Override
-	public boolean member_id_check(String id) {
-		return dao.member_id_check(id);
+	public boolean member_id_check(String userid) {
+		return dao.member_id_check(userid);
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean member_delete(String id) {
+	public boolean member_delete(String userid) {
 		// TODO Auto-generated method stub
 		return false;
 	}
