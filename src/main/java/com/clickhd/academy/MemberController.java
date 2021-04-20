@@ -24,7 +24,7 @@ public class MemberController {
 	}
 	
 	//로그인 요청
-	@RequestMapping("/login.do")
+	@RequestMapping(value = "/login.do", produces = "text/html; charset=UTF-8")
 	public String login_ok(String userid, String pw, HttpSession session, Model model) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
@@ -33,12 +33,16 @@ public class MemberController {
 		MemberVO vo = service.member_login(map);
 		
 		if(vo == null) {
-			model.addAttribute("msg", "로그인 실패");
-			return "redirect:login";
+			model.addAttribute("msg", "로그인 실패하였습니다.");
+			model.addAttribute("url", "login");
 		} else {
 			session.setAttribute("login_info", vo);
-			return "redirect:/";
+			
+			model.addAttribute("msg", "");
+			model.addAttribute("url", "/");
 		}
+		
+		return "include/redirect";
 	}
 	
 	//로그아웃 요청
@@ -68,11 +72,14 @@ public class MemberController {
 		boolean result = service.member_insert(vo);
 		
 		//화면에서 입력한 정보를 DB에 저장한 후 홈 화면으로 연결
-		if(result == false) {
-			model.addAttribute("msg", "회원가입 실패");
-			return "redirect:join";
+		if (result == false) {
+			model.addAttribute("msg", "회원가입을 실패하였습니다.");
+			model.addAttribute("url", "join");
 		} else {
-			return "redirect:/";
+			model.addAttribute("msg", "");
+			model.addAttribute("url", "/");
 		}
+		
+		return "include/redirect";
 	}
 }
