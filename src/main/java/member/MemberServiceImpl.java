@@ -1,9 +1,12 @@
 package member;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import student.StudentVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -15,12 +18,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO member_select(String userid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public MemberVO member_login(HashMap<String, String> map) {
 		return dao.member_login(map);
 	}
@@ -29,17 +26,25 @@ public class MemberServiceImpl implements MemberService {
 	public boolean member_id_check(String userid) {
 		return dao.member_id_check(userid);
 	}
-
+	
 	@Override
-	public boolean member_update(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return false;
+	public List<MemberVO> member_list() {
+		return dao.member_list();
 	}
 
 	@Override
-	public boolean member_delete(String userid) {
-		// TODO Auto-generated method stub
-		return false;
+	public MemberVO member_detail(String userid) {
+		return dao.member_detail(userid);
+	}
+
+	@Override
+	public void member_update(MemberVO vo) {
+		dao.member_update(vo);
+	}
+
+	@Override
+	public void member_delete(String userid) {
+		dao.member_delete(userid);
 	}
 
 }

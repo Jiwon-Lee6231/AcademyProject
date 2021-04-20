@@ -3,9 +3,33 @@ package member;
 import java.sql.Date;
 
 public class MemberVO {
-	private String name, userid, pw, addr, phone, gender, post, email, admin, status;
-	private int age;
+	private String name, userid, pw, addr, phone, gender, post, email, admini, status, employ;
+	private int id, no, age;
 	private Date birth, regisdate, lastdate;
+
+	public String getEmploy() {
+		return employ;
+	}
+
+	public void setEmploy(String employ) {
+		this.employ = employ;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
 
 	public String getName() {
 		return name;
@@ -71,12 +95,12 @@ public class MemberVO {
 		this.email = email;
 	}
 
-	public String getAdmin() {
-		return admin;
+	public String getAdmini() {
+		return admini;
 	}
 
-	public void setAdmin(String admin) {
-		this.admin = admin;
+	public void setAdmini(String admini) {
+		this.admini = admini;
 	}
 
 	public int getAge() {

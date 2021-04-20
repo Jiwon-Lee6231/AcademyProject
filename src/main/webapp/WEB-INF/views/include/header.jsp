@@ -34,7 +34,7 @@
       	<li><a href='list.bo' ${category eq 'bo' ? "class='active'" : '' } class="nav-link px-2 link-dark">Task board</a></li>
        -->
       <!-- 관리자 판단(관리자가 강사 관리에서 관리자 권한 부여 가능) -->
-	  <core:if test="${login_info.admin } eq 'Y' ">
+	  <core:if test="${login_info.admini eq 'Y'}">
 		<li><a href='list.me' ${category eq 'me' ? "class='active'" : '' }  class="nav-link px-2 link-dark">Member</a></li>
 	  </core:if>
     </ul>
