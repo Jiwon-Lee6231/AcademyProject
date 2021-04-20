@@ -1,10 +1,13 @@
 package member;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import student.StudentVO;
 
 @Repository
 public class MemberDAO implements MemberService {
@@ -16,12 +19,6 @@ public class MemberDAO implements MemberService {
 	}
 
 	@Override
-	public MemberVO member_select(String userid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public MemberVO member_login(HashMap<String, String> map) {
 		return sql.selectOne("member.mapper.login", map);
 	}
@@ -30,17 +27,25 @@ public class MemberDAO implements MemberService {
 	public boolean member_id_check(String userid) {
 		return (Integer) sql.selectOne("member.mapper.id_check", userid) == 0 ? true : false;
 	}
-
+	
 	@Override
-	public boolean member_update(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return false;
+	public List<MemberVO> member_list() {
+		return sql.selectList("member.mapper.list");
 	}
 
 	@Override
-	public boolean member_delete(String userid) {
-		// TODO Auto-generated method stub
-		return false;
+	public MemberVO member_detail(String userid) {
+		return sql.selectOne("member.mapper.detail", userid);
+	}
+
+	@Override
+	public void member_update(MemberVO vo) {
+		sql.update("member.mapper.update", vo);
+	}
+
+	@Override
+	public void member_delete(String userid) {
+		sql.delete("member.mapper.delete", userid);
 	}
 
 }
