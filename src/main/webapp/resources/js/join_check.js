@@ -25,7 +25,7 @@ var join = {
 	
 	id_status: function(id) {
 		var reg = /[^a-z0-9]/g;
-		title = $('[name = id]').attr('title');
+		title = $('[name = userid]').attr('title');
 		if(id == '') { 
 			return this.common.empty;
 		} else if(id.match(space)) {
@@ -86,7 +86,7 @@ var join = {
 	tag_status: function(tag) {
 		var data = tag.val();
 		tag = tag.attr('name');
-		if(tag == 'id') {
+		if(tag == 'userid') {
 			data = this.id_status(data);
 		} else if(tag == 'pw') {
 			data = this.pw_status(data);

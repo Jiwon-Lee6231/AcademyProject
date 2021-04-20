@@ -1,8 +1,35 @@
 package member;
 
+import java.sql.Date;
+
 public class MemberVO {
-	private String name, id, pw, addr, tel, gender, birth, post, email, admin;
-	private int age;
+	private String name, userid, pw, addr, phone, gender, post, email, admini, status, employ;
+	private int id, no, age;
+	private Date birth, regisdate, lastdate;
+
+	public String getEmploy() {
+		return employ;
+	}
+
+	public void setEmploy(String employ) {
+		this.employ = employ;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
 
 	public String getName() {
 		return name;
@@ -12,12 +39,12 @@ public class MemberVO {
 		this.name = name;
 	}
 
-	public String getId() {
-		return id;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
 	public String getPw() {
@@ -36,12 +63,12 @@ public class MemberVO {
 		this.addr = addr;
 	}
 
-	public String getTel() {
-		return tel;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getGender() {
@@ -50,14 +77,6 @@ public class MemberVO {
 
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-
-	public String getBirth() {
-		return birth;
-	}
-
-	public void setBirth(String birth) {
-		this.birth = birth;
 	}
 
 	public String getPost() {
@@ -76,12 +95,12 @@ public class MemberVO {
 		this.email = email;
 	}
 
-	public String getAdmin() {
-		return admin;
+	public String getAdmini() {
+		return admini;
 	}
 
-	public void setAdmin(String admin) {
-		this.admin = admin;
+	public void setAdmini(String admini) {
+		this.admini = admini;
 	}
 
 	public int getAge() {
@@ -91,5 +110,37 @@ public class MemberVO {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Date getBirth() {
+		return birth;
+	}
+
+	public void setBirth(Date birth) {
+		this.birth = birth;
+	}
+
+	public Date getRegisdate() {
+		return regisdate;
+	}
+
+	public void setRegisdate(Date regisdate) {
+		this.regisdate = regisdate;
+	}
+
+	public Date getLastdate() {
+		return lastdate;
+	}
+
+	public void setLastdate(Date lastdate) {
+		this.lastdate = lastdate;
+	}
+		
 }
