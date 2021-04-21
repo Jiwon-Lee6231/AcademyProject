@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>[ ${vo.name } ] 학생 정보</h3>
+	<h3>[ ${vo.name } ] 강사 정보</h3>
 	<table class='w-pct60'>
 		<tr>
-			<th class='w-px160'>이름</th>
-			<td>${vo.name }</td>
+			<th>아이디</th>
+			<td>${vo.regisdate }</td>
 		</tr>
 		<tr>
 			<th>생년월일</th>
@@ -38,19 +38,23 @@
 			<td>${vo.addr }</td>
 		</tr>
 		<tr>
+			<th>입사일</th>
+			<td>${vo.regisdate }</td>
+		</tr>
+		<tr>
 			<th>비고</th>
 			<td>${vo.status }</td>
 		</tr>
 		<tr>
-			<th>입학등록일</th>
-			<td>${vo.regisdate }</td>
+			<th>관리자 권한</th>
+			<td>${vo.admini }</td>
 		</tr>
 	</table>
 	
 	<div class='btnSet'>
-		<a class='btn-fill' href="list.st">목록</a>
-		<a class='btn-fill' href="modify.st?id=${vo.id }">수정</a>
-		<a class='btn-fill' onclick="if( confirm('정말 삭제하시겠습니까?') ){ href='delete.st?id=${vo.id }' }">삭제</a>
+		<a class='btn-fill' href="list.me">목록</a>
+		<a class='btn-fill' href="modify.me?userid=${vo.userid }">수정</a>
+		<a class='btn-fill' onclick="if( confirm('정말 삭제하시겠습니까?') ){ href='delete.me?userid=${vo.userid }' }">삭제</a>
 	</div>
 </body>
 </html>

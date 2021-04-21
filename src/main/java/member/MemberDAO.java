@@ -7,8 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import student.StudentVO;
-
 @Repository
 public class MemberDAO implements MemberService {
 	@Autowired private SqlSession sql; //이미 만들어둔 SqlSession을 이용하기 위해 Autowired를 사용한다
@@ -29,6 +27,16 @@ public class MemberDAO implements MemberService {
 	}
 	
 	@Override
+	public void profile_update(MemberVO vo) {
+		sql.update("member.mapper.profile_update", vo);
+	}
+		
+	@Override
+	public void password_update(MemberVO vo) {
+		sql.update("member.mapper.pw_update", vo);
+	}
+	
+	@Override
 	public List<MemberVO> member_list() {
 		return sql.selectList("member.mapper.list");
 	}
@@ -37,10 +45,10 @@ public class MemberDAO implements MemberService {
 	public MemberVO member_detail(String userid) {
 		return sql.selectOne("member.mapper.detail", userid);
 	}
-
+	
 	@Override
 	public void member_update(MemberVO vo) {
-		sql.update("member.mapper.update", vo);
+		sql.update("member.mapper.admin_update", vo);
 	}
 
 	@Override

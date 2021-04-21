@@ -26,7 +26,7 @@
 		<core:forEach items="${list }" var="vo">
 			<tr>
 				<td>${vo.no }</td>
-				<td><a href='detail.me?id=${vo.id}'>${vo.name }</a></td>
+				<td><a href='detail.me?userid=${vo.userid}'>${vo.name }</a></td>
 				<td>${vo.phone }</td>
 				<td>${vo.birth }</td>
 				<td>${vo.regisdate }</td>

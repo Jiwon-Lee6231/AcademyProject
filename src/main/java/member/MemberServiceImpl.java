@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import student.StudentVO;
-
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired private MemberDAO dao;
@@ -25,6 +23,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean member_id_check(String userid) {
 		return dao.member_id_check(userid);
+	}
+	
+	@Override
+	public void profile_update(MemberVO vo) {
+		dao.profile_update(vo);
+	}
+		
+	@Override
+	public void password_update(MemberVO vo) {
+		dao.password_update(vo);
 	}
 	
 	@Override

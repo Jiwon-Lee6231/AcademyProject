@@ -43,8 +43,8 @@ var join = {
 	
 	pw: {
 		valid: { code:'valid', desc: '사용 가능한 비밀번호입니다.' },
-		invalid: { code:'invalid', desc: '비밀번호는 영문 대/소문자, 숫자만 입력하세요.' },
-		lack: { code:'invalid', desc: '비밀번호는 영문 대/소문자, 숫자를 모두 포함해야 합니다.' },
+		invalid: { code:'invalid', desc: '비밀번호는 영문 소문자, 숫자만 입력하세요.' },
+		lack: { code:'invalid', desc: '비밀번호는 영문 소문자, 숫자를 모두 포함해야 합니다.' },
 		equal: { code: 'valid', desc: '비밀번호가 일치합니다.' },
 		notEqual: { code: 'invalid', desc: '비밀번호가 일치하지 않습니다.' }
 	},
@@ -58,7 +58,7 @@ var join = {
 		else if(reg.test(pw)) return this.pw.invalid;
 		else if(pw.length < 5) return this.common.min;
 		else if(pw.length > 10) return this.common.max;
-		else if ( !upper.test(pw) || !lower.test(pw) || !digit.test(pw) ) return this.pw.lack;
+		else if ( !lower.test(pw) || !digit.test(pw) ) return this.pw.lack;
 		else return this.pw.valid;
 	},
 	

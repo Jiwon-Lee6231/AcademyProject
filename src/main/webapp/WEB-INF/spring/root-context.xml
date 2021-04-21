@@ -14,6 +14,6 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->	
 	<import resource="classpath:data/*.xml" />
 	
-	<context:component-scan base-package="member, student, course, tuition, regis_course" />
+	<context:component-scan base-package="member, student, course, tuition, regis_course, user" />
 
 </beans>
