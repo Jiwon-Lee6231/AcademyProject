@@ -28,9 +28,9 @@
 		ORDER BY name ASC
 	</select>
 	
-	<update id="update">
+	<update id="profile_update">
 		UPDATE member
-		SET name=#{name }, birth=#{birth }, phone=#{phone }, email=#{email }, employ=#{employ }, status=#{status }, post=#{post }, addr=#{addr }
+		SET name=#{name }, birth=#{birth }, phone=#{phone }, email=#{email }, post=#{post }, addr=#{addr }
 		WHERE userid=#{userid}
 	</update>
 	
@@ -40,9 +40,9 @@
 		WHERE userid=#{userid }
 	</update>
 	
-	<update id="admini_update">
+	<update id="admin_update">
 		UPDATE member
-		SET admini=#{admini }
+		SET admini=#{admini }, status=#{status }
 		WHERE userid=#{userid }
 	</update>
 

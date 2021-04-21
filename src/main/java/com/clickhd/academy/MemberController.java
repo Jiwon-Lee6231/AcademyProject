@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import member.MemberServiceImpl;
 import member.MemberVO;
-import student.StudentVO;
 
 @Controller
 public class MemberController {
@@ -23,7 +22,7 @@ public class MemberController {
 
 	@RequestMapping("/login")
 	public String login() {
-		return "member/login";
+		return "user/login";
 	}
 
 	// 로그인 요청
@@ -60,7 +59,7 @@ public class MemberController {
 	public String join(HttpSession session) {
 		session.setAttribute("category", "join");
 
-		return "member/join";
+		return "user/join";
 	}
 
 	// 아이디 중복확인 요청
@@ -87,7 +86,49 @@ public class MemberController {
 		return "include/redirect";
 	}
 
-	// 강사 목록 화면
+	// 계정 프로필 화면 요청
+	@RequestMapping("/profile")
+	public String detail_account(String userid, Model model) {
+		MemberVO vo = service.member_detail(userid);
+
+		model.addAttribute("vo", vo);
+
+		return "user/profile";
+	}
+
+	// 회원 정보 수정 화면 요청
+	@RequestMapping("/modify.us")
+	public String modify_account(String userid, Model model) {
+		model.addAttribute("vo", service.member_detail(userid));
+
+		return "user/modify";
+	}
+
+	// 회원 정보 수정 저장 처리 요청
+	@RequestMapping("/update.us")
+	public String update_account(MemberVO vo) {
+		service.profile_update(vo);
+
+		return "redirect:profile.us?userid=" + vo.getUserid();
+	}
+
+	// 비밀번호 변경 화면 요청
+	@RequestMapping("/modify.pw")
+	public String modify_password(String userid, Model model) {
+		model.addAttribute("vo", service.member_detail(userid));
+
+		return "user/modify_pw";
+	}
+
+	// 비밀번호 변경 저장 처리 요청
+	@RequestMapping("/update.pw")
+	public String update_password(MemberVO vo) {
+		service.password_update(vo);
+
+		return "redirect:profile.us?userid=" + vo.getUserid();
+	}
+
+	// 강사 목록 화면(관리자 모드)
 	@RequestMapping("/list.me")
 	public String list(HttpSession session, Model model) {
 		session.setAttribute("category", "me");
@@ -96,5 +137,39 @@ public class MemberController {
 		model.addAttribute("list", list);
 
 		return "member/list";
+	}
+
+	// 강사 상세 화면 요청(관리자 모드)
+	@RequestMapping("/detail.me")
+	public String detail(String userid, Model model) {
+		MemberVO vo = service.member_detail(userid);
+
+		model.addAttribute("vo", vo);
+
+		return "member/detail";
+	}
+
+	// 강사 정보 수정 화면 요청(관리자 모드)
+	@RequestMapping("/modify.me")
+	public String modify(String userid, Model model) {
+		model.addAttribute("vo", service.member_detail(userid));
+
+		return "member/modify";
+	}
+
+	// 강사 정보 수정 저장 처리 요청(관리자 모드)
+	@RequestMapping("/update.me")
+	public String update(MemberVO vo) {
+		service.member_update(vo);
+
+		return "redirect:detail.me?userid=" + vo.getUserid();
+	}
+
+	// 강사 정보 삭제 처리 요청
+	@RequestMapping("/delete.me")
+	public String delete(String userid) {
+		service.member_delete(userid);
+
+		return "redirect:list.me";
 	}
 }
