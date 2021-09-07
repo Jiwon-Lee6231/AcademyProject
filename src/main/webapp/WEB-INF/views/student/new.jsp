@@ -9,6 +9,7 @@
 <body>
 	<h3>신규 입학</h3>
 	<form action="insert.st" method="post">
+		<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
 		<table class='w-pct60'>
 			<tr>
 				<th class='w-px160'>*이름</th>
@@ -44,7 +45,7 @@
 		
 		<div class="btnSet">
 			<button type="submit">등록</button>
-			<button type="button" onclick="list.st">취소</button>
+			<button type="button" onclick="location.href='list.st'">취소</button>
 		</div>
 	</form>
 </body>

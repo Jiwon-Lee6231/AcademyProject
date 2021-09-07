@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<meta name="_csrf" content="${_csrf.token}"/>
 <title>join jsp</title>
 
 <style>
@@ -44,89 +46,83 @@ table tr td input[name=addr] {
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 </head>
+
 <body>
 	<h3>회원가입</h3>
-	<p class="w-pct60 right" style="margin: 0 auto; padding-bottom: 5px; font-size: 13px;">*는 필수 입력 항목입니다.</p>
+	<p class="w-pct60 right"
+		style="margin: 0 auto; padding-bottom: 5px; font-size: 13px;">*는
+		필수 입력 항목입니다.</p>
 	<form action='join.do' method='post'>
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
 		<table class="w-pct60">
 			<tr>
 				<th class="w-px160">* 성명</th>
-				<td><input type="text" name="name" /></td>
+				<td><input type="text" name="name"></td>
 			</tr>
 			<tr>
 				<th>* 아이디</th>
-				<td>
-					<input type="text" title="아이디" name="userid" class="chk" /><button type="button" onclick="id_check()">중복 확인</button><br>
-					<div class='valid'>아이디를 입력하세요. (영문 소문자, 숫자만 입력 가능)</div>
-				</td>
+				<td><input type="text" title="아이디" name="userid" class="chk">
+					<button type="button" onclick="id_check()">중복 확인</button> <br>
+					<div class='valid'>아이디를 입력하세요. (영문 소문자, 숫자만 입력 가능)</div></td>
 			</tr>
 			<tr>
 				<th>* 비밀번호</th>
-				<td>
-					<input type="password" title="비밀번호" name="pw" class="chk" />
-					<div class="valid">비밀번호를 입력하세요. (영문 대/소문자, 숫자를 모두 포함)</div>
-				</td>
+				<td><input type="password" title="비밀번호" name="pw" class="chk">
+					<div class="valid">비밀번호를 입력하세요. (영문 대/소문자, 숫자를 모두 포함)</div></td>
 			</tr>
 			<tr>
 				<th>* 비밀번호 확인</th>
-				<td>
-					<input type="password" title="비밀번호 확인" name="pw_ck" class="chk" />
-					<div class="valid">비밀번호를 다시 입력하세요.</div>
-				</td>
+				<td><input type="password" title="비밀번호 확인" name="pw_ck"
+					class="chk">
+					<div class="valid">비밀번호를 다시 입력하세요.</div></td>
 			</tr>
 			<tr>
 				<th>* 성별</th>
-				<td>
-					<label><input type="radio" name="gender" value="남자"
+				<td><label><input type="radio" name="gender" value="남자"
 						checked />남자</label> <label><input type="radio" name="gender"
-						value="여자" />여자</label>
-				</td>
+						value="여자" />여자</label></td>
 			</tr>
 			<tr>
 				<th>* 이메일</th>
-				<td>
-					<input type="text" title="이메일" name="email" class="chk" />
-					<div class="valid">이메일을 입력하세요.</div>
-				</td>
+				<td><input type="text" title="이메일" name="email" class="chk">
+					<div class="valid">이메일을 입력하세요.</div></td>
 			</tr>
 			<tr>
 				<th>생년월일</th>
-				<td>
-					<input type="text" name="birth" readonly />
-					<span id="delete" style="color: red; position: relative; right: 25px; display: none;">
+				<td><input type="text" name="birth" readonly /> <span
+					id="delete"
+					style="color: red; position: relative; right: 25px; display: none;">
 						<i class="fas fa-times font-img"></i>
-					</span>
-				</td>
+				</span></td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<td>
-					<input type="text" name="phone" /> - 
-					<input type="text" name="phone" /> - 
-					<input type="text" name="phone" />
-				</td>
+				<td><input type="text" name="phone" /> - <input type="text"
+					name="phone" /> - <input type="text" name="phone" /></td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td>
-					<a class='btn-fill-s' onclick="daum_post()">우편번호 찾기</a>
-					<input type="text" name="post" class="w-px60" readonly />
-					<input type="text" name="addr" readonly />
-					<input type="text" name="addr" />
-				</td>
+				<td><a class='btn-fill-s' onclick="daum_post()">우편번호 찾기</a> <input
+					type="text" name="post" class="w-px60" readonly /> <input
+					type="text" name="addr" readonly /> <input type="text" name="addr" /></td>
 			</tr>
 		</table>
-		
+
 		<div class="btnSet">
-			<button type="button" id="btnJoin" onclick="go_join()">회원가입</button>
+			<button type="button" onclick="go_join()">회원가입</button>
+			<!-- <button type="submit">회원가입</button>  -->
 			<button type="button" onclick="<core:url value='/' />">취소</button>
 		</div>
 	</form>
-	
-	<script type="text/javascript" src="js/join_check.js?v=<%=new java.util.Date().getTime()%>"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
+
+	<script type="text/javascript"
+		src="js/join_check.js?v=<%=new java.util.Date().getTime()%>"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script
+		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
 		
 		//올바른 아이디 입력 형태인지 파악하여 유효하지 않다면 중복확인 불필요
@@ -140,11 +136,14 @@ table tr td input[name=addr] {
 				$id.focus();
 				return;
 			}
-		
+			
 			$.ajax({
 				type: 'post',
 				url: 'id_check',
 				data: {userid: $id.val()},
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+				},
 				success: function(data) {
 					data = join.id_usable(data);
 					display_status($id.siblings('div'), data);
@@ -154,6 +153,8 @@ table tr td input[name=addr] {
 					alert(text + ': ' + req.status);
 				}
 			});
+			
+			
 		}
 		
 		

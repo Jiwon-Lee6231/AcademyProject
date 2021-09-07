@@ -17,7 +17,7 @@
 	
 	<resources location="/resources/css/" mapping="/css/**" />
 	<resources location="/resources/js/" mapping="/js/**" />
-	<resources location="/resources/bootstrap/" mapping="/bootstrap/**" />
+	<resources location="/resources/vendor/bootstrap/" mapping="/bootstrap/**" />
 	
 	<!-- images 폴더 맵핑 -->
 	<resources location="/resources/images/" mapping="/images/**" />
@@ -39,6 +39,6 @@
 		<beans:property name="order" value="1" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.clickhd.academy" />
+	<context:component-scan base-package="clickhd.academy.controller" />
 	
 </beans:beans>

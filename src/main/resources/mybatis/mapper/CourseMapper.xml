@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="clickhd.academy.mapper.CourseMapper">
+
+	<!-- resultType : 반환될 데이터타입 -->
+	<select id="course_detail" resultType="CourseVO">
+		SELECT *, (
+			SELECT COUNT(*) 
+			FROM regis_course 
+			WHERE course_id = #{id }
+		)
+		AS regiscnt 
+		FROM course 
+		WHERE id = #{id }
+	</select>
+	
+	<select id="course_list" resultType="CourseVO">
+		SELECT   @ROWNUM := @ROWNUM + 1 AS no,
+		         c.*, (
+			SELECT COUNT(*) 
+			FROM regis_course 
+			WHERE course_id = c.id
+		)
+		AS       regiscnt
+		FROM     course c, (SELECT @ROWNUM := 0) TMP
+		ORDER BY title ASC
+	</select>
+	
+	<select id="avail_list" resultType="CourseVO">
+		SELECT *
+		FROM   course
+		WHERE  id
+		NOT IN (
+			SELECT course_id
+			FROM   regis_course
+			WHERE  student_id = #{id } 
+		)
+	</select>
+	
+	<select id="student_course_list" resultType="CourseVO">
+		SELECT *
+		FROM   course
+		WHERE  id
+		IN (
+			SELECT course_id
+			FROM   regis_course
+			WHERE  student_id = #{id } 
+		)
+	</select>
+	
+	<select id="user_course_list" resultType="CourseVO">
+		SELECT @ROWNUM := @ROWNUM + 1 AS no,
+			   c.* 
+		FROM   course c, (SELECT @ROWNUM := 0) TMP 
+		WHERE  lecturer IN (
+			SELECT name 
+			FROM member 
+			WHERE userid=#{userid }
+		)
+		ORDER BY title ASC
+	</select>
+	
+	<insert id="course_insert">
+		INSERT INTO course(title, content, lecturer, startdate, enddate, fixednum, room, classify, writer)
+		VALUES (#{title }, #{content}, #{lecturer }, #{startdate }, #{enddate }, 
+				#{fixednum }, #{room }, #{classify }, '관리자')
+	</insert>
+	
+	<update id="course_update">
+		UPDATE course 
+		SET    title=#{title }, content=#{content }, lecturer=#{lecturer }, 
+		       startdate=#{startdate }, enddate=#{enddate }, fixednum=#{fixednum },
+		       room=#{room }, classify=#{classify }
+		WHERE  id=#{id }
+	</update>
+	
+	<delete id="course_delete">
+		DELETE FROM course WHERE id={#id }
+	</delete>
+	
+</mapper>

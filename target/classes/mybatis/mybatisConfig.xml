@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- VO 클래스와 동일하게 (Table name + VO) -->
+<configuration>
+	<typeAliases>
+		<!-- 사용자 정보 -->
+		<typeAlias alias="UserVO" type="clickhd.academy.vo.UserVO" />
+		<!-- 회원 정보 -->
+		<typeAlias alias="MemberVO" type="clickhd.academy.vo.MemberVO" />
+		<!-- 학생 정보 -->
+		<typeAlias alias="StudentVO" type="clickhd.academy.vo.StudentVO" />
+		<!-- 강좌 정보 -->
+		<typeAlias alias="CourseVO" type="clickhd.academy.vo.CourseVO" />
+		<!-- 수강 강좌 정보 -->
+		<typeAlias alias="RegisCourseVO" type="clickhd.academy.vo.RegisCourseVO" />
+		<!-- 수강료 정보 -->
+		<typeAlias alias="TuitionVO" type="clickhd.academy.vo.TuitionVO" />
+	</typeAliases>
+</configuration>

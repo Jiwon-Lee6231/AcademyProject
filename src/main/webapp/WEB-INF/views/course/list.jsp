@@ -11,7 +11,6 @@
 <body>
 	<h3>강좌 목록</h3>
 	
-	<!-- CSS 파일을 변경 후에 바로 Refresh가 안된다면 common.css 파일로 들어가서 바로 Refresh 해주면 적용 된다. -->
 	<table class='w-pct60'>
 		<tr>
 			<th class='w-px60'>번호</th>
@@ -25,7 +24,7 @@
 			<tr>
 				<td rowspan="2">${vo.no }</td>
 				<td colspan="3"><a href='detail.co?id=${vo.id}'>${vo.title }</a></td>
-				<td rowspan="2"><a class="btn-fill">수강생 조회</a></td>
+				<td rowspan="2"><a class="btn-fill" href='student_list.co?id=${vo.id } '>수강생 조회</a></td>
 			</tr>
 			<tr>
 				<td>${vo.lecturer }</td>

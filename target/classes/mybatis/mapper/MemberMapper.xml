@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="clickhd.academy.mapper.MemberMaper">
+
+	<select id="member_detail" resultType="MemberVO">
+		SELECT * FROM member WHERE userid=#{userid }
+	</select>
+	
+	<select id="member_list" resultType="MemberVO">
+		SELECT   @ROWNUM := @ROWNUM + 1 AS no,
+		         m.* 
+		FROM     member m, (SELECT @ROWNUM := 0) TMP
+		WHERE    role='default' AND role='admin'
+		ORDER BY name ASC
+	</select>
+	
+	<update id="member_update">
+		UPDATE member
+		SET name=#{name }, birth=#{birth }, phone=#{phone }, email=#{email }, post=#{post }, addr=#{addr }
+		WHERE userid=#{userid }
+	</update>
+	
+	<update id="update_userauth_admin">
+		UPDATE member
+		SET role='admin'
+		WHERE userid=#{userid }
+	</update>
+
+	<delete id="member_delete">
+		DELETE FROM member WHERE userid=#{userid }
+	</delete>
+	
+</mapper>
