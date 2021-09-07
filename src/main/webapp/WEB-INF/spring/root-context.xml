@@ -12,8 +12,12 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->	
-	<import resource="classpath:data/*.xml" />
+	<!-- <import resource="classpath:data/*.xml" />  -->
 	
-	<context:component-scan base-package="member, student, course, tuition, regis_course, user" />
+	<!-- <context:component-scan base-package="member, student, course, tuition, regis_course, user" /> -->
+	<context:component-scan base-package="clickhd.academy.**" />
 
+	<!-- AOP 스캔 -->
+	<aop:aspectj-autoproxy />
+	
 </beans>

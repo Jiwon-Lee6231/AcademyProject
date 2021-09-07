@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="clickhd.academy.mapper.TuitionMapper">
+	
+	<select id="tuition_detail" resultType="TuitionVO">
+		SELECT * FROM tuition WHERE id=#{id }
+	</select>
+	
+	<select id="tuition_list" resultType="TuitionVO">
+		SELECT   @ROWNUM := @ROWNUM + 1 AS no,
+		         t.* 
+		FROM     tuition t, (SELECT @ROWNUM := 0) TMP
+		ORDER BY yearmonth DESC
+	</select>
+	
+	<!-- 수강생의 수강료 내역 -->
+	<select id="student_tuition_list" resultType="TuitionVO">
+		SELECT     @ROWNUM := @ROWNUM + 1 AS no, m.name 
+		FROM       tuition t, (SELECT @ROWNUM := 0) TMP
+		INNER JOIN member m
+		ON         t.student_id = m.id
+		ORDER BY   yearmonth DESC
+	</select>
+	
+	<insert id="tuition_insert">
+		INSERT INTO tuition(depositor, status, amount, depositdate, memo, yearmonth, name)
+		VALUES (#{depositor }, #{status }, #{amount }, #{depositdate }, #{memo }, #{yearmonth }, #{name })
+	</insert>
+	
+	<update id="tuition_update">
+		UPDATE tuition 
+		SET    depositor=#{depositor }, status=#{status }, amount=#{amount }, 
+		       depositdate=#{depositdate }, memo=#{memo }, yearmonth=#{yearmonth },
+		       name=#{name }
+		WHERE  id=#{id }
+	</update>
+	
+	<delete id="tuition_delete">
+		DELETE FROM tuition WHERE id=#{id }
+	</delete>
+	
+</mapper>

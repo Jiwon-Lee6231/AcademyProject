@@ -11,15 +11,12 @@ CREATE TABLE member (
     email      varchar(50)		  NULL,
     phone      varchar(20)        NOT NULL,
 	status     varchar(20)		  NOT NULL,
-	employ     varchar(1)         DEFAULT 'N',
-    admini     varchar(1)         DEFAULT 'N',
+    role       varchar(1)         DEFUALT 'defualt',
 	regisdate  datetime			  NOT NULL DEFAULT now(),
 	lastdate   datetime,
 	PRIMARY KEY(id))
 	DEFAULT CHARSET=utf8
 ;
-
-
 
 -- 공지 테이블 생성
 CREATE TABLE notice(
@@ -64,9 +61,7 @@ CREATE TABLE regis_course (
 	id			int          NOT NULL AUTO_INCREMENT,
 	student_id  int,
 	course_id   int,
-	PRIMARY KEY(id),
-	CONSTRAINT course_id_fk FOREIGN KEY (course_id)  REFERENCES course (id)
-	ON DELETE CASECADE ON UPDATE CASCADE)
+	PRIMARY KEY(id))
 	DEFAULT CHARSET=utf8
 ;
 
@@ -74,11 +69,11 @@ CREATE TABLE regis_course (
 -- 수강료 테이블 생성 (생성 완료)
 CREATE TABLE tuition (
 	id			int 		  NOT NULL AUTO_INCREMENT,
-	depositor   varchar(20),
-	memo		varchar(100),
+	depositor   varchar(20)   NULL,
+	memo		varchar(100)  NULL,
 	status      varchar(50)   NOT NULL,
 	amount		int			  NOT NULL,
-	name  int,
+	name        varchar(20)   NOT NULL,
 	yearmonth   date		  NOT NULL,
 	depositdate date,
 	PRIMARY KEY(id))

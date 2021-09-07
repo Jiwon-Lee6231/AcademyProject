@@ -1,3 +1,4 @@
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,6 +11,7 @@
 	<h3>[ ${vo.name } ] 학생 정보 수정</h3>
 	<form action="update.st" method="post">
 		<input type="hidden" name="id" value="${vo.id }" /> 
+		<s:csrfInput/>
 		<!-- 수정할 고객을 특정하기 위해 id가 필요한데 수정 내용에는 id가 없으므로 hidden 속성으로 추가 -->
 		<table class="w-pct60">
 			<tr>

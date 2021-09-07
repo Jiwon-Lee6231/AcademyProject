@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h3>My Profile</h3>
 	<table class='w-pct60'>
 		<tr>
 			<th class='w-px160'>이름</th>

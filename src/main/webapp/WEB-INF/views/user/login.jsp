@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +57,8 @@
 </head>
 <body class="text-center">
 	<main class="form-signin">
-		<form action='login.do' method='post'>
+		<!-- <form action='login.do' method='post'> -->
+		<form action='loginAsk' method='post'>
 			<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
 			<div class="form-floating">
@@ -74,8 +76,17 @@
 					Remember me
 				</label>
 			</div>
-			<button class="w-100 btn btn-lg btn-primary" type="button" onclick="go_login()">Sign in</button>
+			
+			<s:csrfInput/>
+			
+			<!-- <button class="w-100 btn btn-lg btn-primary" type="button" onclick="go_login()">Sign in</button> -->
+			<button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
 		</form>
+		
+		<!-- 회원가입 버튼 -->
+		<button type="button" class="btn btn-dark btn-md btn-block my-1" onclick="location.href='/join'">회원가입 하기</button><br>
+		
+		${requestScope.loginFailMsg }
 	</main>
 	
 	<script type="text/javascript">
