@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import clickhd.academy.service.TuitionService;
 import clickhd.academy.vo.TuitionVO;
@@ -21,10 +24,10 @@ public class TuitionController {
 	@RequestMapping("/list.tu")
 	public String list(HttpSession session, Model model) {
 		session.setAttribute("category", "tu");
-		
+
 		List<TuitionVO> list = service.tuition_list();
 		model.addAttribute("list", list);
-		
+
 		return "tuition/list";
 	}
 
@@ -34,7 +37,7 @@ public class TuitionController {
 		TuitionVO vo = service.tuition_detail(id);
 
 		model.addAttribute("vo", vo);
-		
+
 		return "tuition/detail";
 	}
 
@@ -56,7 +59,7 @@ public class TuitionController {
 	@RequestMapping("/modify.tu")
 	public String modify(int id, Model model) {
 		model.addAttribute("vo", service.tuition_detail(id));
-		
+
 		return "tuition/modify";
 	}
 
@@ -75,12 +78,14 @@ public class TuitionController {
 
 		return "redirect:list.tu";
 	}
-	
-	// 수강료 삭제 처리 요청
-		@RequestMapping("/delete_list.tu")
-		public String delete_list(int[] ids) {
-			service.tuition_delete_list(ids);
 
-			return "redirect:list.tu";
-		}
+	// 수강료 삭제 처리 요청
+	@ResponseBody
+	@RequestMapping(value="/delete_list.tu", method=RequestMethod.GET)
+	public String delete_list(@RequestParam(value = "ids[]") List<Integer> ids) {
+		service.tuition_delete_list(ids);
+
+		// return "redirect:list.tu";
+		return "";
+	}
 }

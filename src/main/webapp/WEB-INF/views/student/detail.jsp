@@ -60,7 +60,8 @@
 	<br>
 	<br>
 
-	<h3>수강하는 강좌</h3>
+	<h3>수강 강좌</h3>
+	<div id='loaddiv'>
 	<core:if test="${!empty course_list }">
 		<select name="select_co">
 			<core:forEach var="course" items="${course_list }" varStatus="i">
@@ -87,7 +88,7 @@
 			<th>강좌명</th>
 			<th>개강일</th>
 			<th>종강예정일</th>
-			<th></th>
+			<th>수강상태</th>
 		</tr>
 		<core:if test="${!empty stu_course }">
 			<core:forEach items="${stu_course }" var="stu_course">
@@ -95,8 +96,16 @@
 					<td>${stu_course.title }</td>
 					<td>${stu_course.startdate }</td>
 					<td>${stu_course.enddate }</td>
-					<td><a class='btn-fill'
-						href="delete_stu.rc?student_id=${vo.id }&course_id=${stu_course.id }">수강취소</a></td>
+					<td>
+					<!--
+						<core:choose>
+						 	<core:when test="${stu_course.status eq '수강예정'}"> </core:when>
+							수강예정<br>
+							 <a class='btn-fill' href="delete_stu.rc?student_id=${vo.id }&course_id=${stu_course.id }">수강취소</a> 
+							<a class='btn-fill' href="delete_rc(${stu_course.id })"></a>
+						</core:choose>
+					-->
+					</td>
 				</tr>
 			</core:forEach>
 		</core:if>
@@ -107,6 +116,7 @@
 			</tr>
 		</core:if>
 	</table>
+	</div>
 </body>
 
 <script type="text/javascript">
@@ -139,6 +149,34 @@
 		
 		refresh_page();
 		
+	}
+	
+	function delete_rc(cid) {
+		var $sid = $('[name=stu_id]');
+		
+		var chk = confirm("정말 삭제하시겠습니까?");
+		
+		if (chk == true) {
+			$.ajax({
+				type: 'get',
+				url: 'delete_stu.rc',
+				data: {
+					student_id: $sid.val(),
+					course_id: $cid.val()
+				},
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+				},
+				success: function(data) {
+					alert("삭제 완료!");
+					$('#loaddiv').load(location.href + " #loaddiv");
+				},
+				error: function(req, text) {
+					alert(text + ': ' + req.status);
+				}
+				
+			});
+		}
 	}
 </script>
 </html>
