@@ -37,4 +37,12 @@ public class StudentService {
 	public void student_delete(int id) {
 		mapper.student_delete(id);
 	}
+	
+public void student_delete_list(List<Integer> ids) {
+		
+		for (int i = 0; i < ids.size(); i++) {
+			mapper.student_delete(ids.get(i));
+		}
+		
+	}
 }

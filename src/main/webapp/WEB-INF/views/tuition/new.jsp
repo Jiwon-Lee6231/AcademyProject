@@ -9,6 +9,7 @@
 <body>
 	<h3>수강료 등록</h3>
 	<form action="insert.tu" method="post">
+		<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}" />
 		<table class='w-pct60'>
 			<tr>
 				<th class='w-px160'>*수강생 이름</th>

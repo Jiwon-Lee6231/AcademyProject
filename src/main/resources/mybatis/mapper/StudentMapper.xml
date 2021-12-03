@@ -4,38 +4,37 @@
 <mapper namespace="clickhd.academy.mapper.StudentMapper">
 
 	<select id="student_detail" resultType="StudentVO">
-		SELECT * FROM member WHERE id=#{id }
+		SELECT * FROM student WHERE id=#{id }
 	</select>
 	
 	<select id="student_list" resultType="StudentVO">
 		SELECT   @ROWNUM := @ROWNUM + 1 AS no,
-		         m.* 
-		FROM     member m, (SELECT @ROWNUM := 0) TMP
-		WHERE    role != 'default' AND role != 'admin' 
+		         s.* 
+		FROM     student s, (SELECT @ROWNUM := 0) TMP
 		ORDER BY name ASC
 	</select>
 	
 	<select id="course_student_list" resultType="StudentVO">
-		SELECT   m.*
-		FROM     member m
+		SELECT   s.*
+		FROM     student s
 		JOIN	 regis_course rc
-		ON       m.id = rc.student_id
+		ON       s.id = rc.student_id
 		WHERE    rc.course_id=#{id }
 	</select>
 	
 	<insert id="student_insert">
-		INSERT INTO member(name, gender, birth, phone, email, post, addr, status, role)
-		VALUES (#{name }, #{gender}, #{birth }, #{phone }, #{email }, #{post }, #{addr }, '입학', '')
+		INSERT INTO student(name, gender, birth, phone, email, post, addr, status)
+		VALUES (#{name }, #{gender}, #{birth }, #{phone }, #{email }, #{post }, #{addr }, '입학')
 	</insert>
 	
 	<update id="student_update">
-		UPDATE member 
+		UPDATE student 
 		SET gender=#{gender }, email=#{email }, phone=#{phone }, post=#{post }, addr=#{addr }
 		WHERE id=#{id }
 	</update>
 	
 	<delete id="student_delete">
-		DELETE FROM member WHERE id=#{id }
+		DELETE FROM student WHERE id=#{id }
 	</delete>
 	
 </mapper>

@@ -33,10 +33,10 @@ public class TuitionService {
 		mapper.tuition_delete(id);
 	}
 	
-	public void tuition_delete_list(int[] ids) {
+	public void tuition_delete_list(List<Integer> ids) {
 		
-		for (int i = 0; i < ids.length; i++) {
-			mapper.tuition_delete(ids[i]);
+		for (int i = 0; i < ids.size(); i++) {
+			mapper.tuition_delete(ids.get(i));
 		}
 		
 	}

@@ -33,7 +33,7 @@
 	<update id="update_user">
 		UPDATE member
 		SET name=#{name }, birth=#{birth }, phone=#{phone }, email=#{email }, post=#{post }, addr=#{addr }
-		WHERE userid=#{userid}
+		WHERE userid=#{userid }
 	</update>
 	
 	<update id="update_password">

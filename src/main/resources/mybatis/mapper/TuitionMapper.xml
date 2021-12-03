@@ -19,8 +19,8 @@
 	<select id="student_tuition_list" resultType="TuitionVO">
 		SELECT     @ROWNUM := @ROWNUM + 1 AS no, m.name 
 		FROM       tuition t, (SELECT @ROWNUM := 0) TMP
-		INNER JOIN member m
-		ON         t.student_id = m.id
+		INNER JOIN student s
+		ON         t.student_id = s.id
 		ORDER BY   yearmonth DESC
 	</select>
 	
